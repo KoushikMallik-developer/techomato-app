@@ -1,0 +1,205 @@
+[
+ {
+  "id": "docs",
+  "name": "Docs",
+  "category": "Office",
+  "tagline": "A full word processor in your browser.",
+  "status": "available"
+ },
+ {
+  "id": "sheets",
+  "name": "Sheets",
+  "category": "Office",
+  "tagline": "Spreadsheets with a real formula engine.",
+  "status": "available"
+ },
+ {
+  "id": "slides",
+  "name": "Slides",
+  "category": "Office",
+  "tagline": "Design and present slide decks.",
+  "status": "available"
+ },
+ {
+  "id": "forms",
+  "name": "Forms",
+  "category": "Office",
+  "tagline": "Build surveys and quizzes, review the results.",
+  "status": "available"
+ },
+ {
+  "id": "todo",
+  "name": "To Do",
+  "category": "Productivity",
+  "tagline": "Plan your day and never lose a task.",
+  "status": "available"
+ },
+ {
+  "id": "planner",
+  "name": "Planner",
+  "category": "Productivity",
+  "tagline": "Boards, schedules and charts for your plans.",
+  "status": "available"
+ },
+ {
+  "id": "notes",
+  "name": "Notes",
+  "category": "Productivity",
+  "tagline": "Notebooks with sections, pages and rich text.",
+  "status": "available"
+ },
+ {
+  "id": "calendar",
+  "name": "Calendar",
+  "category": "Productivity",
+  "tagline": "Day, week and month views with repeating events.",
+  "status": "available"
+ },
+ {
+  "id": "money",
+  "name": "Money",
+  "category": "Life",
+  "tagline": "Budgets, accounts and spending reports.",
+  "status": "available"
+ },
+ {
+  "id": "habits",
+  "name": "Habits",
+  "category": "Life",
+  "tagline": "Build habits, keep streaks, see your progress.",
+  "status": "available"
+ },
+ {
+  "id": "paint",
+  "name": "Paint",
+  "category": "Creative",
+  "tagline": "Draw, edit and layer images.",
+  "status": "available"
+ },
+ {
+  "id": "photo",
+  "name": "Photo Studio",
+  "category": "Studio",
+  "tagline": "Layered photo editing, retouching and compositing.",
+  "status": "available"
+ },
+ {
+  "id": "audio",
+  "name": "Audio Studio",
+  "category": "Studio",
+  "tagline": "Multitrack audio recording, editing and mixing.",
+  "status": "available"
+ },
+ {
+  "id": "video",
+  "name": "Video Studio",
+  "category": "Studio",
+  "tagline": "Timeline video editor with titles, looks and export.",
+  "status": "available"
+ },
+ {
+  "id": "motion",
+  "name": "Motion Studio",
+  "category": "Studio",
+  "tagline": "Animate layers with keyframes, effects and expressions.",
+  "status": "available"
+ },
+ {
+  "id": "3d",
+  "name": "3D Studio",
+  "category": "Studio",
+  "tagline": "Model, light, animate and render 3D scenes.",
+  "status": "available"
+ },
+ {
+  "id": "calculator",
+  "name": "Calculator",
+  "category": "Utilities",
+  "tagline": "Standard, scientific, graphing and programmer modes.",
+  "status": "available"
+ },
+ {
+  "id": "clock",
+  "name": "Clock",
+  "category": "Utilities",
+  "tagline": "Focus sessions, timers, alarms and world time.",
+  "status": "available"
+ },
+ {
+  "id": "pdf",
+  "name": "PDF Toolkit",
+  "category": "Utilities",
+  "tagline": "Merge, split, edit and sign PDFs.",
+  "status": "available"
+ },
+ {
+  "id": "whiteboard",
+  "name": "Whiteboard",
+  "category": "Creative",
+  "tagline": "An infinite canvas to sketch and brainstorm.",
+  "status": "available"
+ },
+ {
+  "id": "mindmap",
+  "name": "Mind Maps",
+  "category": "Creative",
+  "tagline": "Organise ideas as a mind map.",
+  "status": "available"
+ },
+ {
+  "id": "flow",
+  "name": "Flowcharts",
+  "category": "Creative",
+  "tagline": "Draw flowcharts and diagrams.",
+  "status": "available"
+ },
+ {
+  "id": "code",
+  "name": "Code Playground",
+  "category": "Developer",
+  "tagline": "Write HTML, CSS and JavaScript with a live preview.",
+  "status": "available"
+ },
+ {
+  "id": "convert",
+  "name": "Image Converter",
+  "category": "Utilities",
+  "tagline": "Convert, resize and compress images in bulk.",
+  "status": "available"
+ },
+ {
+  "id": "recorder",
+  "name": "Recorder",
+  "category": "Utilities",
+  "tagline": "Record your screen, camera or voice.",
+  "status": "available"
+ },
+ {
+  "id": "vault",
+  "name": "Vault",
+  "category": "Utilities",
+  "tagline": "A private, encrypted password manager.",
+  "status": "available"
+ },
+ {
+  "id": "writer",
+  "name": "Writer",
+  "category": "Productivity",
+  "tagline": "Write in Markdown with a live preview.",
+  "status": "available"
+ },
+ {
+  "id": "cards",
+  "name": "Flashcards",
+  "category": "Productivity",
+  "tagline": "Remember anything with spaced repetition.",
+  "status": "available"
+ },
+ {
+  "id": "desktop-suite",
+  "name": "Desktop Suite",
+  "category": "Office",
+  "tagline": "Docs, Sheets and Slides as a Windows app.",
+  "status": "coming-soon"
+ }
+]
