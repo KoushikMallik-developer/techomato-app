@@ -1,0 +1,13 @@
+{
+  "name": "Techomato",
+  "short_name": "Techomato",
+  "description": "Free browser games, everyday apps and labs.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F5F2EC",
+  "theme_color": "#C8381F",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

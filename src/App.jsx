@@ -26,21 +26,29 @@ const FAQ = [
 const reduceMotion = () => typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // light / dark, like the other Techomato apps: follows the system until the visitor picks one
+// The saved choice and the system setting are read after mount so the prerendered HTML hydrates cleanly;
+// an inline script in index.html applies the saved theme before first paint.
 function useTheme() {
-  const [theme, setTheme] = useState(() => { try { return localStorage.getItem('techomato-theme') || ''; } catch { return ''; } });
+  const [theme, setTheme] = useState('');
+  const [system, setSystem] = useState(false);
   useEffect(() => {
-    if (theme) document.documentElement.setAttribute('data-theme', theme);
-    else document.documentElement.removeAttribute('data-theme');
-    try { if (theme) localStorage.setItem('techomato-theme', theme); } catch { /* storage blocked */ }
-  }, [theme]);
-  const dark = theme ? theme === 'dark' : typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches;
-  return [dark, () => setTheme(dark ? 'light' : 'dark')];
+    try { setTheme(localStorage.getItem('techomato-theme') || ''); } catch { /* storage blocked */ }
+    if (typeof matchMedia !== 'undefined') setSystem(matchMedia('(prefers-color-scheme: dark)').matches);
+  }, []);
+  const choose = (t) => {
+    setTheme(t);
+    if (t) document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('techomato-theme', t); } catch { /* storage blocked */ }
+  };
+  const dark = theme ? theme === 'dark' : system;
+  return [dark, () => choose(dark ? 'light' : 'dark')];
 }
 
 // tiny path router: "/" is the home page, "/about" the About page
 const norm = (p) => (p.length > 1 ? p.replace(/\/+$/, '') : p) || '/';
-function usePath() {
-  const [path, setPath] = useState(() => norm(window.location.pathname));
+// `initial` is the URL being prerendered at build time; in the browser the real location is used
+function usePath(initial) {
+  const [path, setPath] = useState(() => norm(typeof window === 'undefined' ? initial : window.location.pathname));
   useEffect(() => {
     const on = () => setPath(norm(window.location.pathname));
     window.addEventListener('popstate', on);
@@ -204,7 +212,7 @@ function About() {
 function Art({ p, className = '' }) {
   return (
     <div className={`t-cover ${className}`} style={{ '--c1': p.colors[0], '--c2': p.colors[1] }}>
-      {p.cover && <img src={p.cover} alt="" loading="lazy" decoding="async" />}
+      {p.cover && <img src={p.cover} alt="" width="640" height="360" loading="lazy" decoding="async" />}
       {p.id === 'softwares' && <span className="t-art-apps">{HERO_APPS.map((id) => <AppLogo key={id} id={id} size={56} />)}</span>}
       {p.id === 'labs' && <span className="t-art-ic"><Icon name={p.icon} size={64} stroke={1.4} /></span>}
     </div>
@@ -269,7 +277,7 @@ function SectionHead({ p, eyebrow, title, children }) {
 function GameCard({ g }) {
   return (
     <a href={g.url} className="t-card t-game" style={{ '--c1': '#333', '--c2': '#111' }}>
-      <div className="t-cover"><img src={g.cover} alt="" loading="lazy" decoding="async" /></div>
+      <div className="t-cover"><img src={g.cover} alt={`${g.title} cover art, a free browser ${g.genre.toLowerCase()} game`} width="640" height="360" loading="lazy" decoding="async" /></div>
       <div className="t-game-body">
         <div className="t-between">
           <span className="t-chip">{g.genre}</span>
@@ -312,10 +320,29 @@ function Softwares() {
   );
 }
 
-export default function App() {
+function NotFound() {
+  useEffect(() => {
+    document.title = 'Page not found – Techomato';
+    const m = document.createElement('meta');
+    m.name = 'robots';
+    m.content = 'noindex';
+    document.head.appendChild(m);
+    return () => m.remove();
+  }, []);
+  return (
+    <section className="t-empty-page">
+      <h1 className="t-h2">Nothing here</h1>
+      <p className="t-muted">This page does not exist. Try one of our sites instead.</p>
+      <a href="/" onClick={link('/')} className="t-btn t-btn-accent">Go to the home page</a>
+    </section>
+  );
+}
+
+export default function App({ url = '/' }) {
   const [dark, toggle] = useTheme();
-  const path = usePath();
+  const path = usePath(url);
   const onAbout = path === '/about';
+  const known = onAbout || path === '/';
   return (
     <div className="t-app" id="top">
       <header className="t-nav">
@@ -335,10 +362,10 @@ export default function App() {
       </header>
 
       <main>
-        {onAbout ? <About /> : (<>        <section className="t-wrap t-hero">
+        {!known ? <NotFound /> : onAbout ? <About /> : (<>        <section className="t-wrap t-hero">
           <div className="t-stack t-hero-text">
             <span className="t-chip t-chip-pass t-reveal" style={{ alignSelf: 'flex-start' }}><Icon name="bolt" size={14} />Games · Softwares · Labs</span>
-            <h1 className="t-h1 t-hero-h t-reveal">Play. Create.<br /><span className="t-accent">Explore.</span></h1>
+            <h1 className="t-h1 t-hero-h t-reveal"><span className="t-sr">Techomato: free browser games, apps and labs. </span>Play. Create.<br /><span className="t-accent">Explore.</span></h1>
             <p className="t-lead t-ink2 t-reveal t-reveal-2">Techomato makes free 3D games, a growing suite of everyday apps from Docs to Video Studio, and a lab for new ideas. All of it opens in your browser, with nothing to install.</p>
             <div className="t-row t-reveal t-reveal-3" style={{ flexWrap: 'wrap' }}>
               <a href="#softwares" className="t-btn t-btn-accent t-btn-lg" onClick={jump('softwares')}>Browse apps</a>
